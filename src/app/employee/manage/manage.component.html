@@ -1,0 +1,52 @@
+<form #userForm="ngForm" (ngSubmit)="onFormSubmit(userForm)">
+  <table>
+	 <tr> 
+	   <td>Name:</td>
+	   <td> 
+        <input name="EmpName" [ngModel]="Employee.EmpName" required minlength="5" #empName="ngModel">
+		   <div *ngIf="empName.errors?.required && empName.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			  Name required. 
+		   </div>
+		   <div *ngIf="empName.errors?.minlength && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			  Name must be at least 5 characters long.
+		   </div>		   
+	   </td>
+	 </tr> 
+	 <tr>
+	   <td>Department: </td>
+	   <td>
+	        <select name="Department" [(ngModel)]="Employee.Department" required #department="ngModel">
+                   <option *ngFor="let Dpt of DepartmentList" [ngValue]="Dpt">
+                     {{ Dpt.DeptName }}
+                   </option>
+                </select>
+          <div *ngIf="department.invalid && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+              Department required. 
+          </div>
+	    </td>	
+	 </tr>	 
+	 <tr>
+	  <td>Salary:</td>
+	   <td> 
+       <input name="Salary" [ngModel]="Employee.Salary" required  #salary="ngModel">
+		   <div *ngIf="salary.errors?.required && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+			  Salary required. 
+		   </div>
+	   </td>		 
+	 <tr> 	  
+    <tr>
+      <td>Email:</td>
+      <td> 
+        <input name="Email" [ngModel]="Employee.Email" required  #email="ngModel">
+        <div *ngIf="email.errors?.required && userForm.submitted && !isValidFormSubmitted" [ngClass] = "'error'"> 
+        Email required. 
+        </div>
+      </td>		 
+    <tr> 
+
+	   <td colspan="2">
+	      <button>Submit</button>
+	   </td>
+	 </tr>	   
+  </table>  
+</form> 
